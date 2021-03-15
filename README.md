@@ -5,6 +5,8 @@ Thanks [Cirrus CI](https://cirrus-ci.com/) for their awesome service!
 
 I tried to explian every steps by comments! Try to read those throughly!
 
+[ You can use your own creativity for this whole process, what i did is used the normal process, collected the cache, redownloaded and reused it, and for overcoming time limit first build was done with a timeout from our side to get ccache uploaded. You can do these processes manually too! But I like ci! Let's a ci be ci, hehe. ]
+
 ## Steps:
 
 1. Fork this repo

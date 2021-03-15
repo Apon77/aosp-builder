@@ -17,7 +17,7 @@ ccache -z # Clear old stats, so monitor script will provide real ccache statisti
 #sleep 100m
 #kill $(pidof soong_ui)
 #kill $(pidof make)
-#and dont use below codes for first 1 or 2 times, to get ccache upleaded
+#and dont use below codes for first 1 or 2 times, to get ccache uploaded,
 
 
 # upload function for uploading rom zip file! I don't want unwanted builds in my google drive haha!
