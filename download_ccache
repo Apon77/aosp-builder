@@ -1,0 +1,14 @@
+#!/bin/bash
+# Lets see machine specifications and environments
+df -h
+free -h
+nproc
+cat /etc/os*
+env
+
+url=https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz # Where cccahe is located
+
+cd /tmp # Where to download cccahe
+time aria2c $url -x16 -s50 # Using aria2c for speed haha, ccache will be at /tmp/ccache.tar.gz since my file name is ccache.tar.gz
+time tar xf ccache.tar.gz  # Extract ccache so ci can use it
+rm -rf ccache.tar.gz # Remove unnecessary downloaded file, it will speed up the upload ccache process
