@@ -39,10 +39,10 @@ id=571213272 # Your telegram id
 # Upload rom zip file if succeed to build! Send notification to tg! And send shell to tg if build fails!
 
 # Let's compile by parts! Coz of ram issue!
-make api-stubs-docs -j10 || echo no problem
-make hiddenapi-lists-docs -j10 || echo no problem
-make system-api-stubs-docs -j10 || echo no problem
-make test-api-stubs-docs -j10 || echo no problem
+make api-stubs-docs || echo no problem
+make hiddenapi-lists-docs || echo no problem
+make system-api-stubs-docs || echo no problem
+make test-api-stubs-docs || echo no problem
 
 make aex -j10 \
 	&& send_zip=$(up out/target/product/mido/*zip) && tg $id "Build Succeed!
