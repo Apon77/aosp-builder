@@ -49,7 +49,7 @@ make hiddenapi-lists-docs || echo no problem
 make system-api-stubs-docs || echo no problem
 make test-api-stubs-docs || echo no problem
 
-make aex -j10 \
+make aex -j14 \
 	&& send_zip=$(up out/target/product/mido/*zip) && tg $id "Build Succeed!
 $send_zip" \
 	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
