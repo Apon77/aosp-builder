@@ -12,4 +12,17 @@ time com ccache 1 # Compression level 1, its enough
 
 mkdir -p ~/.config/rclone
 echo "$rclone_config" > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
-time rclone copy ccache.tar.gz apon:ccache/ci2 -P # apon is my rclone config name (first line without [] of ~/.config/rclone/rclone.conf file from rclone setupped pc), ccache/ci2 is where ccache will be saved in my cloud, use yours one
+time rclone copy ccache.tar.gz apon:ccache/ci3 -P # apon is my rclone config name (first line without [] of ~/.config/rclone/rclone.conf file from rclone setupped pc), ccache/ci2 is where ccache will be saved in my cloud, use yours one
+
+# The content of my ~/.config/rclone/rclone.conf is 
+[apon]
+type = drive
+client_id = 58522331211-u1g6tfnugjeoopo5rs1876hcc7li2urmp.apps.googleusercontent.com
+client_secret = P0ZJjpaauUUZPONlnkWAgy8hi
+scope = drive
+root_folder_id = 1yS-VHHjHEEP-G2ALIDQhcXKLb7fAQENM_B
+chunk_size = 512M
+token = {"access_token":"ya29.a0AfSMBSRkA_qvoky7YTlvdp922eC4epnXG1cUDe8Fl57lp8_xrbJ8bVraqG-UKo7pjOMV5z0MyfZvhA_rL9OVm0uKV4xNJfoFKSrcuavcXKlllRs7Ee4rRhFH4oPS2xW3FfYr7X0NV7tPSrp6mRIzXBjnsh","token_type":"Bearer","refresh_token":"1//0gvzWxI6auEpuFFu-L9IrpmeSmWtpotVbAL4-1aQOLC_BtBF0APhssGBC4HAGfnQwpDOfANeM58jFskUVedSMXQ","expiry":"2021-03-10T03:13:33.010661057+06:00"}
+team_drive = 0EDgCmfZsbgFCGaupPVA
+
+# so i used apon at time rclone copy line, as mentioned, first line without []. ccache/ci3 is the location where will be ccache uploaded.
