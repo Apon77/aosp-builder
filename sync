@@ -12,4 +12,4 @@ repo init -q --no-repo-verify --depth=1 -u git://github.com/AospExtended/manifes
 git clone https://github.com/Apon77Lab/android_.repo_local_manifests.git --depth 1 -b aex .repo/local_manifests -q
 
 # Sync source with -q, no need unnecessary messages, you can remove -q if want! try with -j30 first, if fails, it will try again with -j8
-repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 -q || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8 -q
+repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8

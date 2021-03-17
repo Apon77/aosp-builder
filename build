@@ -13,13 +13,44 @@ ccache -o compression=true # Will save times and data to download and upload cca
 ccache -z # Clear old stats, so monitor script will provide real ccache statistics
 
 # Next 8 lines should be run first to collect ccache and then upload, after doning it 1 or 2 times, our ccache will help to build without these 8 lines
+#make api-stubs-docs || echo no problem
+#make hiddenapi-lists-docs || echo no problem
+#make system-api-stubs-docs || echo no problem
+#make test-api-stubs-docs || echo no problem
+#make aex -j10 &  # I used aex build command
+#sleep 85m # Lets give some space for uploading ccache
+#kill %1 # better way to kill it!
+#ccache -s
+#and dont use below codes for first 1 or 2 times, to get ccache uploaded,
+#as instructed, i got enough cccahe more than 4.5gb, tough source is not buildable, still i wanna go to final steps, my intention to collect ccache is done. Let's start final build, and get shell when bulid fails too! If source is buildable we will get a final zip file, and if not buildable, we will get a shell access to fix it. 1 minute silence for source :-(
+#So, i am adding back things which i removed previously! also with my bot and tg id
+
+# upload function for uploading rom zip file! I don't want unwanted builds in my google drive haha!
+up(){
+	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
+	# 14 days, 10 GB limit
+}
+
+tg(){
+	bot_api=1692865707:AAHvKZogI5sUGtqjd2sZvNl8tib0Q_xcYkY # Your tg bot api, dont use my one haha
+	your_telegram_id=$1 # No need to touch
+	msg=$2 # No need to touch
+	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}"
+}
+
+id=571213272 # Your telegram id
+
+# Build command! j10 for 10 cpu, j8 for 8 cpu, otherwise memeroy will end up even its 24G
+# Upload rom zip file if succeed to build! Send notification to tg! And send shell to tg if build fails!
+
+# Let's compile by parts! Coz of ram issue!
 make api-stubs-docs || echo no problem
 make hiddenapi-lists-docs || echo no problem
 make system-api-stubs-docs || echo no problem
 make test-api-stubs-docs || echo no problem
-make aex -j10 &  # I used aex build command
-sleep 85m # Lets give some space for uploading ccache
-kill %1 # better way to kill it!
-ccache -s
-#and dont use below codes for first 1 or 2 times, to get ccache uploaded,
-#as instructed, i removed below lines temporarily. Will add those from 2nd or 3rd builds may be.
+
+make aex -j10 \
+	&& send_zip=$(up out/target/product/mido/*zip) && tg $id "Build Succeed!
+$send_zip" \
+	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
+ccache -s # Let's print ccache statistics finally
