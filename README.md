@@ -1,6 +1,8 @@
 # AOSP Builder
 Build aosp project in docker with Ubuntu 20.04 via ci environments (by [Apon77](https://github.com/Apon77))
 
+Thanks Almighty Who has given mental strength, knowledge and patience.
+
 Thanks [Cirrus CI](https://cirrus-ci.com/) for their awesome service!
 
 I tried to explian every steps by comments! Try to read those throughly!
@@ -30,7 +32,10 @@ so that it can be accesed url like this https://roms.apon77.workers.dev with a p
 10.  All other steps can be found inside every script! Plese read those carefully.
 11.  After setting up all other scripts according to your needs, then just do any commit in this repo, and build will be triggered! \
 Whenever you need a build you can just commit in this repo. By the way, check the cpu count when you start build, its recommended to use 8cpu and 10cpu for the flexibility (in .cirrus.yml file), Otherwise account gets locks for few times! Which is unpleasant!
-12. First commit build should be stopped immediatly with 1cpu, and setup your rclone_config encrypted variable in cirrus ci repo, instructed in .cirrus.yml file
-13. Later build should be with 8cpu, also instructed within scripts. 
+12. First commit build should be stopped immediatly with 1cpu, and setup your rclone_config encrypted variable in cirrus ci repo, instructed in .cirrus.yml file. Please use your own rclone_config variable in .cirrus.yml. Otherwise, you may not be able to complete the build. \
+Your build log must not be yellow marked as "Failed to decrypt some environment variables: NOT_FOUND:".
+13. Later 2 builds should be with 10cpu to collect and upload ccache, also instructed within scripts. This collecting cccahe step (both upload and download) is very important. Without this step probably you wont be succeed to get a build.
+14. I appologize that, this repo came with some previous ccache. I got that when i was testing. \
+So, for your convinence, https://github.com/Apon77Lab/aosp-builder did fork this repo and did essential commits and got a succeed build, which is almost identical to your situation and has no previous ccache. It's highly recommended that you should observe carefully his commits to know what you actually need to do in scripts. For little support you can contact me here! https://t.me/Apon77Mido
 
 **Humble request to all not to abuse this system. Happy building!!!**
