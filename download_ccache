@@ -6,7 +6,7 @@ nproc
 cat /etc/os*
 env
 
-url=https://roms.apon77.workers.dev/ccache/ci2/ccache.tar.gz # Where cccahe is located, use your ones, from where you want to download ccache!
+url=http://steep-frost-b567.kashifukato.workers.dev/ccache/ci2/ccache.tar.gz # Where cccahe is located, use your ones, from where you want to download ccache!
 
 cd /tmp # Where to download cccahe
 time aria2c $url -x16 -s50 # Using aria2c for speed haha, ccache will be at /tmp/ccache.tar.gz since my file name is ccache.tar.gz
