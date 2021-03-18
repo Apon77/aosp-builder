@@ -4,10 +4,10 @@ mkdir -p /tmp/rom # Where to sync source
 cd /tmp/rom
 
 # Repo init command, that -device,-mips,-darwin,-notdefault part will save you more time and storage to sync, add more according to your rom and choice. Optimization is welcomed! Let's make it quit, and with depth=1 so that no unnecessary things.
-repo init -q --no-repo-verify --depth=1 -u git://github.com/AospExtended/manifest.git -b 11.x -g default,-device,-mips,-darwin,-notdefault
+repo init --depth=1 -u git://github.com/LineageOS/android.git -b lineage-18.1
 
 # Clone local manifest! So that no need to manually git clone repos or change hals, you can use normal git clone or rm and re clone, they will cost little more time, and you may get timeout! Let's make it quit and depth=1 too.
-git clone https://github.com/Apon77Lab/android_.repo_local_manifests.git --depth 1 -b aex .repo/local_manifests
+repo sync --force-sync --no-tags --no-clone-bundle -j$(nproc --all) && git clone https://github.com/Redmi-MT6768/android_device_xiaomi_merlin.git -b lineage-18.1 device/xiaomi/merlin && git clone https://github.com/Redmi-MT6768/android_kernel_xiaomi_mt6768.git -b eleven kernel/xiaomi/mt6768 && git clone https://github.com/Redmi-MT6768/android_vendor_xiaomi_merlin.git -b eleven vendor/xiaomi/merlin && git clone https://github.com/Redmi-MT6768/android_vendor_mediatek_ims.git -b eleven vendor/mediatek/ims && git clone https://github.com/PixelExperience/vendor_mediatek_interfaces.git vendor/mediatek/interfaces && cd frameworks/base && wget https://github.com/PixelExperience/frameworks_base/commit/37f5a323245b0fd6269752742a2eb7aa3cae24a7.patch && git apply 37f5a323245b0fd6269752742a2eb7aa3cae24a7.patch && cd ../ && cd opt/net/ims && wget https://github.com/PixelExperience/frameworks_opt_net_ims/commit/661ae9749b5ea7959aa913f2264dc5e170c63a0a.patch && git apply 661ae9749b5ea7959aa913f2264dc5e170c63a0a.patch && cd ../ && cd wifi && wget https://github.com/PixelExperience/frameworks_opt_net_wifi/commit/3bd2c14fbda9c079a4dc39ff4601ba54da589609.patch && git apply 3bd2c14fbda9c079a4dc39ff4601ba54da589609.patch && cd ../../../../
 
 # Sync source with -q, no need unnecessary messages, you can remove -q if want! try with -j30 first, if fails, it will try again with -j8
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8
