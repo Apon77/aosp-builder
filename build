@@ -11,9 +11,8 @@ ccache -M 20G # It took only 6.4GB for mido
 ccache -o compression=true # Will save times and data to download and upload ccache, also negligible performance issue
 ccache -z # Clear old stats, so monitor script will provide real ccache statistics
 
-# Next 8 lines should be run first to collect ccache and then upload, after doning it 1 or 2 times, our ccache will help to build without these 8 lines
+# Next 8 lines should be run first to collect ccache and then upload, after doning it 1 or 2 times, our ccache will help to build without these 8 lines.
 #make api-stubs-docs || echo no problem, we need ccache
-#make hiddenapi-lists-docs || echo no problem, we need ccache
 #make system-api-stubs-docs || echo no problem we need ccache
 #make test-api-stubs-docs || echo no problem, we need ccache
 #make aex -j10 & # dont remove that '&'
@@ -29,8 +28,13 @@ up(){
 	# 14 days, 10 GB limit
 }
 
+# It's recommended to use google drive(rclone) as upload solution for coping with the time limit. Un-comment next 3 lines to upload with rclone in drive. Also change apon and junk according to your config name, uploading folder of drive
+#up(){
+#	time rclone copy $1 apon:junk -P # apon is my rclone config name, 
+#}
+
 tg(){
-	bot_api=1692865707:AAHvKZogI5sUGtqjd2sZvNl8tib0Q_xcYkY # Your tg bot api, dont use my one haha
+	bot_api=1692865707:AAHvKZogI5sUGtqjd2sZvNl8tib0Q_xcYkY # Your tg bot api, dont use my one haha, it's better to encrypt bot api too.
 	your_telegram_id=$1 # No need to touch 
 	msg=$2 # No need to touch
 	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}"
@@ -38,12 +42,10 @@ tg(){
 
 id=571213272 # Your telegram id
 
-# Build command! j10 for 10 cpu, j8 for 8 cpu, otherwise memeroy will end up even its 24G
 # Upload rom zip file if succeed to build! Send notification to tg! And send shell to tg if build fails!
 
 # Let's compile by parts! Coz of ram issue!
 make api-stubs-docs || echo no problem
-make hiddenapi-lists-docs || echo no problem
 make system-api-stubs-docs || echo no problem
 make test-api-stubs-docs || echo no problem
 
