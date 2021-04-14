@@ -14,7 +14,7 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 
 #device
 git clone https://github.com/aseelps/device_xiaomi_vince-11 --single-branch -b DotOS device/xiaomi/vince
-git clone https://github.com/aseelps/vendor_xiaomi_vince-11--single-branch -b 11 vendor/xiaomi/vince
+git clone https://github.com/aseelps/vendor_xiaomi_vince-11 --single-branch -b 11 vendor/xiaomi/vince
 git clone https://github.com/Blacksuan19/kernel_dark_ages_vince.git --single-branch -b darky kernel/xiaomi/vince
 rm -rf hardware/qcom-caf/wlan && cp -r hardware/qcom/wlan hardware/qcom-caf/wlan
 rm -rf vendor/qcom/opensource/data-ipa-cfg-mgr && git clone https://github.com/AOSP-Common/android_vendor_qcom_opensource_data-ipa-cfg-mgr -b 11.0 vendor/qcom/opensource/data-ipa-cfg-mgr
