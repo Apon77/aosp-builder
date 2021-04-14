@@ -13,8 +13,8 @@ task:
       image: apon77/aosp:latest # It has built-in setup environment + repo, aria2, rclone, pigz, username ci, and email ci@ci.ci [You can use your own docker image if you want, or you can use this one too!]
       cpu: 8  #8 or less cpu for dummy build, 8 cpu for the final build, 8cpu highest for free accounts. Don't try to use more than 8cpu as free user, you may get blocked by ci.
       memory: 32G # So that we can have ram when needed, 32G highest
-    download_ccache_background_script: # To download ccache in background
-      - ./download_ccache # Ccache download script
+#    download_ccache_background_script: # To download ccache in background
+#     - ./download_ccache # Ccache download script
     sync_script: # To sync source
       - ./sync # Source sync script
     monitor_background_script: # To monitor ccache and machine status every minute, runs in background
