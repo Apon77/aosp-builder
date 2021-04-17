@@ -41,7 +41,10 @@ tg(){
 }
 
 id=272503335 # Your telegram id
-tg $id "Build completed"
+tg $id "Build started"
+
+mkdir -p ~/.config/rclone
+echo "$rclone_config" > ~/.config/rclone/rclone.conf
 
 # Upload rom zip file if succeed to build! Send notification to tg! And send shell to tg if build fails!
 
@@ -55,3 +58,5 @@ make bacon -j8 \
 $send_zip" \
 	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
 ccache -s # Let's print ccache statistics finally
+
+tg $id "Build Uploaded successfully" 
